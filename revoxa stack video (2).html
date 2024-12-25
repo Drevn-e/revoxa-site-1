@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Header Style */
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #333;
+            letter-spacing: 2px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        h1:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Video Wrapper (main container) */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            opacity: 1;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        /* Hidden Class to Fade Out */
+        .video-wrapper.hidden {
+            opacity: 0;
+            transform: scale(1);
+        }
+
+        /* Video Player */
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* Hover effect for the title */
+        .hover-title {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .hover-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #333;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+        .hover-title:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Parallax Scroll (optional) */
+        .parallax {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -1;
+            filter: brightness(60%);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Buttons (Modern, Overlay on sides) */
+        .nav-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+            z-index: 10;
+            opacity: 0;
+            animation: fadeInButtons 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeInButtons {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-button {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            font-size: 3rem;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+        }
+
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: scale(1.2);
+        }
+
+        .nav-button:focus {
+            outline: none;
+        }
+
+        /* Left Button (rotate on click) */
+        .prev-button {
+            transform: rotate(180deg); /* Reverse the arrow */
+        }
+
+        /* Rotation effect when clicked */
+        .prev-button.clicked,
+        .next-button.clicked {
+            animation: rotateArrow 0.5s ease-in-out forwards;
+        }
+
+        @keyframes rotateArrow {
+            0% {
+                transform: rotate(0);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Parallax Background -->
+    <div class="parallax"></div>
+
+    <!-- Header Section -->
+    <h1 class="hover-title">Long-Form Videos</h1>
+
+    <!-- Video Wrapper (outside container for buttons) -->
+    <div class="video-wrapper" id="video-wrapper">
+        <video id="video-player" controls>
+            <source src="https://res.cloudinary.com/doil7ek5v/video/upload/v1731800459/documentry_pryb9p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button class="nav-button prev-button" id="prev-button">&#8592;</button>
+        <button class="nav-button next-button" id="next-button">&#8594;</button>
+    </div>
+
+    <!-- JavaScript for Video Transition and Navigation -->
+    <script>
+        const videoUrls = [
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731800459/documentry_pryb9p.mp4", 
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731793679/magnets_media_h2aq1u.mp4", 
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731794113/iman_style_edit_vtunk8.mp4", 
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731802346/Faceless_Edit_1_ayokhk.mp4", 
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731805123/custom_select_box.mp4"
+        ];
+
+        let currentVideoIndex = 0;
+
+        const videoWrapper = document.getElementById('video-wrapper');
+        const videoPlayer = document.getElementById('video-player');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+
+        function changeVideo() {
+            // Fade out the current video
+            videoWrapper.classList.add('hidden');
+
+            setTimeout(() => {
+                // Change video source
+                videoPlayer.src = videoUrls[currentVideoIndex];
+                videoPlayer.load();
+                videoPlayer.play();
+
+                // Fade in the new video
+                videoWrapper.classList.remove('hidden');
+            }, 500); // Wait for opacity transition to complete
+        }
+
+        // Autoplay next video when the current video ends
+        videoPlayer.addEventListener('ended', () => {
+            currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
+            changeVideo();
+        });
+
+        // Button functionality to navigate videos
+        prevButton.addEventListener('click', () => {
+            prevButton.classList.add('clicked');
+            currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
+            changeVideo();
+            setTimeout(() => {
+                prevButton.classList.remove('clicked');
+            }, 500); // Reset the rotation animation after 500ms
+        });
+
+        nextButton.addEventListener('click', () => {
+            nextButton.classList.add('clicked');
+            currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
+            changeVideo();
+            setTimeout(() => {
+                nextButton.classList.remove('clicked');
+            }, 500); // Reset the rotation animation after 500ms
+        });
+
+        // Initially load the first video
+        changeVideo();
+    </script>
+</body>
+</html> 
