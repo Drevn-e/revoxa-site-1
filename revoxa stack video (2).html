@@ -3,272 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fff;
-            color: #333;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            height: 100vh;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Header Style */
-        h1 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 30px;
-            color: #333;
-            letter-spacing: 2px;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        h1:hover {
-            transform: translateY(-10px);
-        }
-
-        /* Video Wrapper (main container) */
-        .video-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            background-color: #fff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-            opacity: 1;
-            transform: scale(0.95);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        }
-
-        /* Hidden Class to Fade Out */
-        .video-wrapper.hidden {
-            opacity: 0;
-            transform: scale(1);
-        }
-
-        /* Video Player */
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-
-        /* Hover effect for the title */
-        .hover-title {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .hover-title::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 2px;
-            background-color: #333;
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, left 0.4s ease;
-        }
-
-        .hover-title:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        /* Parallax Scroll (optional) */
-        .parallax {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://source.unsplash.com/random/1920x1080') no-repeat center center fixed;
-            background-size: cover;
-            z-index: -1;
-            filter: brightness(60%);
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Navigation Buttons (Modern, Overlay on sides) */
-        .nav-buttons {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            transform: translateY(-50%);
-            z-index: 10;
-            opacity: 0;
-            animation: fadeInButtons 0.5s ease-in-out forwards;
-        }
-
-        @keyframes fadeInButtons {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .nav-button {
-            background-color: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-size: 3rem;
-            border: none;
-            padding: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-        }
-
-        .nav-button:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-            transform: scale(1.2);
-        }
-
-        .nav-button:focus {
-            outline: none;
-        }
-
-        /* Left Button (rotate on click) */
-        .prev-button {
-            transform: rotate(180deg); /* Reverse the arrow */
-        }
-
-        /* Rotation effect when clicked */
-        .prev-button.clicked,
-        .next-button.clicked {
-            animation: rotateArrow 0.5s ease-in-out forwards;
-        }
-
-        @keyframes rotateArrow {
-            0% {
-                transform: rotate(0);
-            }
-            100% {
-                transform: rotate(180deg);
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <title>Animated Flex Cards</title>
 </head>
+
+<style>
+/* Base Styles (Desktop and Mobile) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: white;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+}
+
+/* Card Styles (For both Mobile and Desktop) */
+.card {
+    width: 80px;
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    margin: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    transition: .6s cubic-bezier(.28,-0.03,0,.99);
+    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
+    position: relative;
+}
+
+.card .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.card video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.card > .row {
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.card > .row > .icon {
+    background: #223;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.card > .row > .description {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: 80px;
+    width: 520px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition-delay: .3s;
+    transition: all .3s ease;
+}
+
+.description p {
+    color: #b0b0ba;
+    padding-top: 5px;
+}
+
+.description h4 {
+    text-transform: uppercase;
+}
+
+input {
+    display: none;
+}
+
+input:checked + label {
+    width: 600px;
+}
+
+input:checked + label .description {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Mobile Version Styles */
+@media only screen and (max-width: 768px) {
+
+    /* Wrapper and container setup */
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden; /* Prevent scrolling */
+    }
+
+    .container {
+        width: 100%;
+        max-width: 400px; /* Max width for mobile view */
+        display: flex;
+        flex-direction: column; /* Stack the cards vertically */
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%; /* Full height of the screen */
+        overflow-y: auto; /* Allow scrolling if needed for the whole container */
+    }
+
+    /* Card Styles */
+    .card {
+        width: 90%; /* Default width for small cards */
+        height: 80px; /* Small card height initially */
+        margin: 10px 0; /* Margin between cards */
+        border-radius: .75rem;
+        background-size: cover;
+        cursor: pointer;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+        box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
+        transition: height 0.6s cubic-bezier(.28,-0.03,0,.99), width 0.6s cubic-bezier(.28,-0.03,0,.99); /* Smooth height and width expansion */
+        max-height: 80vh; /* Prevents card from expanding too much */
+        overflow: hidden; /* Prevents horizontal overflow */
+    }
+
+    .card .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Keep video behind content */
+    }
+
+    .card video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    .card > .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        z-index: 1;
+    }
+
+    .card > .row > .icon {
+        background: #223;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .card > .row > .description {
+    display: none; /* Hide the description on mobile */
+}
+
+
+    /* Checkboxes for card expansion */
+    input {
+        display: none;
+    }
+
+    /* Change this value to control how much the card expands in height */
+    input:checked + label {
+        height: 200px; /* Custom height for expanded card */
+        width: 91%; /* Custom width for expanded card */
+    }
+
+    /* You can modify this if you'd like the width to change proportionally */
+    input:checked + label .description {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Prevent horizontal scrolling */
+    body, html {
+        overflow: hidden;
+    }
+}
+
+
+</style>
+
 <body>
-    <!-- Parallax Background -->
-    <div class="parallax"></div>
+    <div class="wrapper">
+        <div class="container">
+          
+            <input type="radio" name="slide" id="c1" checked>
+            <label for="c1" class="card">
+                <div class="video-background">
+                    <video autoplay muted loop>
+                        <source src="https://res.cloudinary.com/doil7ek5v/video/upload/v1731802346/Faceless_Edit_1_ayokhk.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="row">
+                    <div class="icon">1</div>
+                    <div class="description">
+                        <h4>Winter</h4>
+                        <p>Winter has so much to offer - creative activities</p>
+                    </div>
+                </div>
+            </label>
 
-    <!-- Header Section -->
-    <h1 class="hover-title">Long-Form Videos</h1>
+          
+            <input type="radio" name="slide" id="c2">
+            <label for="c2" class="card">
+                <div class="video-background">
+                    <video autoplay muted loop>
+                        <source src="https://res.cloudinary.com/doil7ek5v/video/upload/v1731800459/documentry_pryb9p.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="row">
+                    <div class="icon">2</div>
+                    <div class="description">
+                        <h4>Digital Technology</h4>
+                        <p>Gets better every day - stay tuned</p>
+                    </div>
+                </div>
+            </label>
 
-    <!-- Video Wrapper (outside container for buttons) -->
-    <div class="video-wrapper" id="video-wrapper">
-        <video id="video-player" controls>
-            <source src="https://res.cloudinary.com/doil7ek5v/video/upload/v1731800459/documentry_pryb9p.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+            <!-- Card 3 -->
+            <input type="radio" name="slide" id="c3">
+            <label for="c3" class="card">
+                <div class="video-background">
+                    <video autoplay muted loop>
+                        <source src="https://res.cloudinary.com/doil7ek5v/video/upload/v1731793679/magnets_media_h2aq1u.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="row">
+                    <div class="icon">3</div>
+                    <div class="description">
+                        <h4>Globalization</h4>
+                        <p>Help people all over the world</p>
+                    </div>
+                </div>
+            </label>
+
+            <!-- Card 4 -->
+            <input type="radio" name="slide" id="c4">
+            <label for="c4" class="card">
+                <div class="video-background">
+                    <video autoplay muted loop>
+                        <source src="https://res.cloudinary.com/doil7ek5v/video/upload/v1731794113/iman_style_edit_vtunk8.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="row">
+                    <div class="icon">4</div>
+                    <div class="description">
+                        <h4>New Technologies</h4>
+                    </div>
+                </div>
+            </label>
+        </div>
     </div>
-
-    <!-- Navigation Buttons -->
-    <div class="nav-buttons">
-        <button class="nav-button prev-button" id="prev-button">&#8592;</button>
-        <button class="nav-button next-button" id="next-button">&#8594;</button>
-    </div>
-
-    <!-- JavaScript for Video Transition and Navigation -->
-    <script>
-        const videoUrls = [
-            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731800459/documentry_pryb9p.mp4", 
-            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731793679/magnets_media_h2aq1u.mp4", 
-            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731794113/iman_style_edit_vtunk8.mp4", 
-            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731802346/Faceless_Edit_1_ayokhk.mp4", 
-            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731805123/custom_select_box.mp4"
-        ];
-
-        let currentVideoIndex = 0;
-
-        const videoWrapper = document.getElementById('video-wrapper');
-        const videoPlayer = document.getElementById('video-player');
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
-
-        function changeVideo() {
-            // Fade out the current video
-            videoWrapper.classList.add('hidden');
-
-            setTimeout(() => {
-                // Change video source
-                videoPlayer.src = videoUrls[currentVideoIndex];
-                videoPlayer.load();
-                videoPlayer.play();
-
-                // Fade in the new video
-                videoWrapper.classList.remove('hidden');
-            }, 500); // Wait for opacity transition to complete
-        }
-
-        // Autoplay next video when the current video ends
-        videoPlayer.addEventListener('ended', () => {
-            currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
-            changeVideo();
-        });
-
-        // Button functionality to navigate videos
-        prevButton.addEventListener('click', () => {
-            prevButton.classList.add('clicked');
-            currentVideoIndex = (currentVideoIndex - 1 + videoUrls.length) % videoUrls.length;
-            changeVideo();
-            setTimeout(() => {
-                prevButton.classList.remove('clicked');
-            }, 500); // Reset the rotation animation after 500ms
-        });
-
-        nextButton.addEventListener('click', () => {
-            nextButton.classList.add('clicked');
-            currentVideoIndex = (currentVideoIndex + 1) % videoUrls.length;
-            changeVideo();
-            setTimeout(() => {
-                nextButton.classList.remove('clicked');
-            }, 500); // Reset the rotation animation after 500ms
-        });
-
-        // Initially load the first video
-        changeVideo();
-    </script>
 </body>
-</html> 
+</html>
