@@ -218,81 +218,97 @@
 
     <script>
         const videos = [
-    "https://res.cloudinary.com/doil7ek5v/video/upload/v1731800630/Best_1_SFC_Talking_head_rtlbnx.mp4",
-    "https://res.cloudinary.com/doil7ek5v/video/upload/v1725031267/Assassin_s_creed_motion_poster_ezrdtm.mp4",
-    "https://res.cloudinary.com/doil7ek5v/video/upload/v1724932252/Mkbhd_owfgxw.mp4"
-];
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1731800630/Best_1_SFC_Talking_head_rtlbnx.mp4",
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1725031267/Assassin_s_creed_motion_poster_ezrdtm.mp4",
+            "https://res.cloudinary.com/doil7ek5v/video/upload/v1724932252/Mkbhd_owfgxw.mp4"
+        ];
 
-const videoPlayer = document.getElementById('video-player');
-const videoContainer = document.querySelector('.video-container');
-const dots = document.querySelectorAll('.dot');
-let currentVideoIndex = 0;
+        const videoPlayer = document.getElementById('video-player');
+        const videoContainer = document.querySelector('.video-container');
+        const dots = document.querySelectorAll('.dot');
+        let currentVideoIndex = 0;
 
-// Preload the next video
-function preloadNextVideo() {
-    const nextVideoIndex = (currentVideoIndex + 1) % videos.length;
-    videoPlayer.src = videos[nextVideoIndex];
-}
-
-// Play next video on scroll
-let isScrolling;
-window.addEventListener('wheel', (event) => {
-    clearTimeout(isScrolling);
-    isScrolling = setTimeout(() => {
-        let direction = event.deltaY > 0 ? 1 : -1;
-
-        if (direction > 0) {
-            currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-        } else {
-            currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+        // Preload the next video
+        function preloadNextVideo() {
+            const nextVideoIndex = (currentVideoIndex + 1) % videos.length;
+            videoPlayer.src = videos[nextVideoIndex];
         }
 
-        videoContainer.style.transform = `translateY(${direction * 100}%)`;
+        // Play next video on scroll
+        let isScrolling;
+        window.addEventListener('wheel', (event) => {
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                let direction = event.deltaY > 0 ? 1 : -1;
 
-        setTimeout(() => {
-            videoPlayer.src = videos[currentVideoIndex];
-            videoPlayer.play();
-            videoContainer.style.transition = 'transform 0s';
-            videoContainer.style.transform = 'translateY(0%)';
+                if (direction > 0) {
+                    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                } else {
+                    currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+                }
+
+                videoContainer.style.transform = `translateY(${direction * 100}%)`;
+
+                setTimeout(() => {
+                    videoPlayer.src = videos[currentVideoIndex];
+                    videoPlayer.play();
+                    videoContainer.style.transition = 'transform 0s';
+                    videoContainer.style.transform = 'translateY(0%)';
+                    setTimeout(() => {
+                        videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                    }, 50);
+                }, 700);
+
+                preloadNextVideo();
+                updateActiveDot();
+            }, 150);
+        });
+
+        // Handle video end and autoplay next
+        videoPlayer.addEventListener('ended', () => {
+            videoContainer.style.transform = 'translateY(-100%)';
+
             setTimeout(() => {
-                videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            }, 50);
-        }, 700);
+                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                videoPlayer.src = videos[currentVideoIndex];
+                videoPlayer.play();
+                videoContainer.style.transition = 'transform 0s';
+                videoContainer.style.transform = 'translateY(100%)';
+                setTimeout(() => {
+                    videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                    videoContainer.style.transform = 'translateY(0%)';
+                }, 50);
+            }, 700);
 
-        preloadNextVideo();
-        updateActiveDot();
-    }, 150);
-});
+            updateActiveDot();
+        });
 
-// Handle video end and autoplay next
-videoPlayer.addEventListener('ended', () => {
-    videoContainer.style.transform = 'translateY(-100%)';
-
-    setTimeout(() => {
-        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-        videoPlayer.src = videos[currentVideoIndex];
-        videoPlayer.play();
-        videoContainer.style.transition = 'transform 0s';
-        videoContainer.style.transform = 'translateY(100%)';
-        setTimeout(() => {
-            videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
-            videoContainer.style.transform = 'translateY(0%)';
-        }, 50);
-    }, 700);
-
-    updateActiveDot();
-});
-
-// Update the active dot
-function updateActiveDot() {
-    dots.forEach((dot, index) => {
-        dot.classList.remove('active');
-        if (index === currentVideoIndex) {
-            dot.classList.add('active');
+        // Update the active dot
+        function updateActiveDot() {
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === currentVideoIndex) {
+                    dot.classList.add('active');
+                }
+            });
         }
-    });
-}
 
+        // Add click event listener to dots
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                // Animate clicked dot
+                dot.classList.add('clicked');
+                setTimeout(() => {
+                    dot.classList.remove('clicked');
+                }, 500);
+
+                currentVideoIndex = index;
+                videoPlayer.src = videos[currentVideoIndex];
+                videoPlayer.play();
+                videoContainer.style.transform = 'translateY(0%)';
+                updateActiveDot();
+            });
+        });
 // Add click event listener to dots
 dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
@@ -302,75 +318,26 @@ dots.forEach((dot, index) => {
             dot.classList.remove('clicked');
         }, 500);
 
-        currentVideoIndex = index;
-        videoPlayer.src = videos[currentVideoIndex];
-        videoPlayer.play();
-        videoContainer.style.transform = 'translateY(0%)';
+        // Apply the same transition animation as autoplay when a dot is clicked
+        videoContainer.style.transform = 'translateY(-100%)';
+
+        setTimeout(() => {
+            currentVideoIndex = index;
+            videoPlayer.src = videos[currentVideoIndex];
+            videoPlayer.play();
+            videoContainer.style.transition = 'transform 0s'; // Reset transition
+            videoContainer.style.transform = 'translateY(100%)'; // Move out of view
+            setTimeout(() => {
+                videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)'; // Restore transition
+                videoContainer.style.transform = 'translateY(0%)'; // Bring back to normal position
+            }, 50);
+        }, 700);
+
         updateActiveDot();
     });
 });
 
-// Swipe gesture handling (for touch screens)
-let touchStartY = 0;
-let touchEndY = 0;
-
-function handleTouchStart(event) {
-    touchStartY = event.touches[0].clientY;
-}
-
-function handleTouchMove(event) {
-    touchEndY = event.touches[0].clientY;
-}
-
-function handleTouchEnd() {
-    if (touchStartY - touchEndY > 50) {
-        // Swipe up
-        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-        videoContainer.style.transform = 'translateY(-100%)';
-
-        setTimeout(() => {
-            videoPlayer.src = videos[currentVideoIndex];
-            videoPlayer.play();
-            videoContainer.style.transition = 'transform 0s';
-            videoContainer.style.transform = 'translateY(100%)';
-            setTimeout(() => {
-                videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
-                videoContainer.style.transform = 'translateY(0%)';
-            }, 50);
-        }, 700);
-
         preloadNextVideo();
-        updateActiveDot();
-    }
-
-    if (touchEndY - touchStartY > 50) {
-        // Swipe down
-        currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
-        videoContainer.style.transform = 'translateY(100%)';
-
-        setTimeout(() => {
-            videoPlayer.src = videos[currentVideoIndex];
-            videoPlayer.play();
-            videoContainer.style.transition = 'transform 0s';
-            videoContainer.style.transform = 'translateY(-100%)';
-            setTimeout(() => {
-                videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
-                videoContainer.style.transform = 'translateY(0%)';
-            }, 50);
-        }, 700);
-
-        preloadNextVideo();
-        updateActiveDot();
-    }
-}
-
-// Add event listeners for touch events
-videoContainer.addEventListener('touchstart', handleTouchStart);
-videoContainer.addEventListener('touchmove', handleTouchMove);
-videoContainer.addEventListener('touchend', handleTouchEnd);
-
-preloadNextVideo();
-
     </script>
 </body>
 </html>
