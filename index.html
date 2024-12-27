@@ -13,13 +13,53 @@
             flex-direction: column;
             align-items: center;
             overflow: hidden; /* Prevent body from overflowing */
+            height: 100vh; /* Ensure the body takes full height */
+            position: relative; /* Allow absolute positioning of bg */
         }
+
+        /* Full-screen fixed background animation */
+    {
+  background-color: #fff
+   ;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200vh;
+  background: transparent url('http://assets.iceable.com/img/noise-transparent.png') repeat 0 0;
+  background-repeat: repeat;
+  animation: bg-animation .2s infinite;
+  opacity: .9;
+  visibility: visible;
+}
+
+@keyframes bg-animation {
+    0% { transform: translate(0,0) }
+    10% { transform: translate(-5%,-5%) }
+    20% { transform: translate(-10%,5%) }
+    30% { transform: translate(5%,-10%) }
+    40% { transform: translate(-5%,15%) }
+    50% { transform: translate(-10%,5%) }
+    60% { transform: translate(15%,0) }
+    70% { transform: translate(0,10%) }
+    80% { transform: translate(-15%,0) }
+    90% { transform: translate(10%,5%) }
+    100% { transform: translate(5%,0) }
+}
 
         /* Container that will hold the entire scrollable content */
         .content-container {
             width: 100vw;
             height: 100vh;
             overflow: auto; /* Allow scrolling for the main content */
+            position: relative;
         }
 
         /* Full viewport width for iframes */
@@ -27,8 +67,7 @@
             width: 100vw;
             border: none;
             display: block;
-            /* Ensure iframes are responsive to screen size */
-            max-width: 100%;
+            max-width: 100%; /* Ensure iframes are responsive to screen size */
         }
 
         /* Specific height for the stack video section */
@@ -87,15 +126,20 @@
     </style>
 </head>
 <body>
+
+    <!-- Background Animation (Fixed and Jittering) -->
+    <div class="bg"></div>
+
     <!-- Wrapping the entire content that should scroll -->
     <div class="content-container">
+        <!-- Iframes (scrollable content sections) -->
         <iframe src="landing revoxa (1).html"></iframe>
         <iframe src="revoxa stack video (2).html" id="stack-video"></iframe>
         <iframe src="reels scroll revoxa (3).html"></iframe>
-<iframe src="thumbnail.html"></iframe>
+        <iframe src="thumbnail.html"></iframe>
         <iframe src="exp revoxa (4).html"></iframe>
-<iframe src="FAQs.html"></iframe>
-
+        <iframe src="FAQs.html"></iframe>
     </div>
+
 </body>
 </html>
