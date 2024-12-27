@@ -105,25 +105,31 @@
         }
 
         /* Modify scrollbar size for mobile devices */
-        @media (max-width: 768px) {
-            .content-container::-webkit-scrollbar {
-                width: 6px; /* Smaller scrollbar width for mobile */
-            }
+      /* Modify scrollbar size for mobile devices */
+@media (max-width: 768px) {
+    .content-container::-webkit-scrollbar {
+        width: 6px; /* Smaller scrollbar width for mobile */
+        position: fixed;
+        right: 0;
+    }
 
-            .content-container::-webkit-scrollbar-thumb {
-                background-color: rgba(0, 0, 0, 0.3); /* Lighter thumb color for mobile */
-            }
-        }
+    .content-container::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3); /* Lighter thumb color for mobile */
+    }
+}
 
-        @media (max-width: 480px) {
-            .content-container::-webkit-scrollbar {
-                width: 4px; /* Even smaller scrollbar for smaller devices */
-            }
+@media (max-width: 480px) {
+    .content-container::-webkit-scrollbar {
+        width: 4px; /* Even smaller scrollbar for smaller devices */
+        position: fixed;
+        right: 0;
+    }
 
-            .content-container::-webkit-scrollbar-thumb {
-                background-color: rgba(0, 0, 0, 0.3); /* Lighter thumb color for mobile */
-            }
-        }
+    .content-container::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3); /* Lighter thumb color for mobile */
+    }
+}
+
 
 .wrapper {
   --size: 500px;
