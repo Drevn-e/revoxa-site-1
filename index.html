@@ -123,10 +123,113 @@
             }
         }
 
+.wrapper {
+  --size: 499px;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  top: 50%;
+  left: 50%;
+  margin: calc(var(--size) / -2);
+  filter: blur(20px); /* Increase blur for the entire wrapper */
+  animation: floating 3s ease-in-out infinite alternate; /* New floating animation added */
+  
+span {
+    background: linear-gradient(45deg, red, yellow, grey, cyan, blue, magenta);
+    /* Or you can try radial gradient for a different effect */
+    /* background: radial-gradient(circle, red, yellow, grey, cyan, blue, magenta); */
+
+    position: absolute;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+  
+  p:nth-child(1) {
+    position: absolute;
+    animation: skewing-child .2s ease-in-out infinite alternate;
+    
+    span {
+      width: calc(var(--size) / 10);
+      height: calc(var(--size) / 10);
+      margin: calc(var(--size) / -20);
+      animation: moving 2s cubic-bezier(.97,.01,.12,.99) infinite alternate;
+    }
+  }
+  
+  p:nth-child(2) {
+    position: absolute;
+    animation: squishing 1s ease-in-out infinite alternate;
+    
+    span {
+      width: calc(var(--size) / 4);
+      height: calc(var(--size) / 4);
+      top: 50%;
+      left: 50%;
+      margin: calc(var(--size) / -8);
+      animation: skewing 2s 1.5s ease-in-out infinite;
+    }
+  } 
+}
+
+/* New floating animation */
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); } /* Move up */
+  100% { transform: translateY(0); }    /* Move back to original position */
+}
+
+@keyframes skewing {
+  0% { transform: skewX(6deg); }
+  10% { transform: skewX(-6deg); }
+  20% { transform: skewX(4deg); }
+  30% { transform: skewX(-4deg); }
+  40% { transform: skewX(2deg); }
+  50% { transform: skewX(-6deg); }
+  55% { transform: skewX(6deg); }
+  60% { transform: skewX(-5deg); }
+  65% { transform: skewX(5deg); }
+  70% { transform: skewX(-4deg); }
+  75% { transform: skewX(4deg); }
+  80% { transform: skewX(-3deg); } 
+  85% { transform: skewX(3deg); }
+  90% { transform: skewX(-2deg); } 
+  95% { transform: skewX(2deg); }
+  100% { transform: skewX(1deg); }
+}
+
+@keyframes skewing-child {
+  0% { transform: skewX(-10deg); }
+  100% { transform: skewX(10deg); }
+}
+
+@keyframes moving {
+  0% { transform: translate(calc(var(--size) / -2.5)); }
+  30% { transform: translate(calc(var(--size) / -10)); } 
+  70% { transform: translate(calc(var(--size) / 10)); }
+  100% { transform: translate(calc(var(--size) / 2.5)); }
+}
+
+@keyframes squishing {
+  10%, 40%, 80% { transform: scale(1, .9); }
+  0%, 30%, 60%, 100% { transform: scale(.9, 1); }
+}
+
+
     </style>
 </head>
 <body>
 
+ <div class="wrapper">
+  <p><span></span></p>
+  <p><span></span></p>
+</div>
     <!-- Background Animation (Fixed and Jittering) -->
     <div class="bg"></div>
 
@@ -134,12 +237,18 @@
     <div class="content-container">
         <!-- Iframes (scrollable content sections) -->
         <iframe src="landing revoxa (1).html"></iframe>
+
         <iframe src="revoxa stack video (2).html" id="stack-video"></iframe>
         <iframe src="reels scroll revoxa (3).html"></iframe>
+
         <iframe src="thumbnail.html"></iframe>
         <iframe src="exp revoxa (4).html"></iframe>
         <iframe src="FAQs.html"></iframe>
     </div>
+
+
+
+
 
 </body>
 </html>
