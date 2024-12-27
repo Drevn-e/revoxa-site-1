@@ -9,7 +9,7 @@
             align-items: center;
             justify-content: center;
             font-family: Ubuntu, sans-serif;
-           background: transparent;
+            background: transparent;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -309,6 +309,40 @@
                 updateActiveDot();
             });
         });
+let touchStartY = 0;
+let touchEndY = 0;
+
+window.addEventListener('touchstart', (event) => {
+    touchStartY = event.touches[0].clientY;
+});
+
+window.addEventListener('touchend', (event) => {
+    touchEndY = event.changedTouches[0].clientY;
+
+    if (touchStartY - touchEndY > 50) {
+        // Swipe Up: Next video
+        currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+    } else if (touchEndY - touchStartY > 50) {
+        // Swipe Down: Previous video
+        currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+    }
+
+    // Update video and animation
+    videoContainer.style.transform = 'translateY(-100%)';
+    
+    setTimeout(() => {
+        videoPlayer.src = videos[currentVideoIndex];
+        videoPlayer.play();
+        videoContainer.style.transition = 'transform 0s';
+        videoContainer.style.transform = 'translateY(100%)';
+        setTimeout(() => {
+            videoContainer.style.transition = 'transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1)';
+            videoContainer.style.transform = 'translateY(0%)';
+        }, 50);
+    }, 700);
+
+    updateActiveDot();
+});
 // Add click event listener to dots
 dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
