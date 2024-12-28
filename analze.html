@@ -64,6 +64,44 @@
             outline: none;
             background-color: transparent;
         }
+
+
+
+@media (max-width: 768px) {
+    /* Center the carousel container */
+    .carousel {
+        height: 500px; /* Adjust carousel height for mobile */
+        display: flex;
+        justify-content: center; /* Horizontally center the carousel items */
+        align-items: center; /* Vertically center the carousel items */
+    }
+
+    /* Adjust carousel item size and positioning */
+    .carousel .carousel-item {
+        width: 90%; /* Adjust to take up 90% of the screen width for mobile */
+        height: 250px; /* Adjust height for mobile */
+        display: flex;
+        justify-content: center; /* Ensure image is centered horizontally */
+        align-items: center; /* Ensure image is centered vertically */
+    }
+
+    .img-area {
+        width: 100%; /* Ensure the container takes full width */
+        height: 100%; /* Ensure the container takes full height */
+        display: flex;
+        justify-content: center; /* Center the image horizontally */
+        align-items: center; /* Center the image vertically */
+    }
+
+    .img-area img {
+        width: 100%; /* Ensure the image covers full container width */
+        height: 100%; /* Ensure the image covers full container height */
+        object-fit: cover; /* Maintain the aspect ratio while filling the container */
+    }
+}
+
+
+
     </style>
 
 </head>
