@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X Icon Example</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Variables */
+    :root {
+      --redColor: rgba(244, 67, 54, 1);
+      --blueColor: rgba(33, 150, 243, 1);
+    }
+
+    /* Container */
+   .flex-center {
+  width: 100%;
+  min-height: auto; /* Remove vertical height restriction */
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Horizontal gap between icons */
+  padding: 0; /* Ensure no extra padding */
+  margin: 0; /* Remove any default margins */
+}
+
+    /* Icon Style */
+    .icon-3d {
+      font-size: 4rem;
+      color: #000;
+      transition: transform 0.2s, text-shadow 0.2s;
+    }
+
+    /* Hover Animation */
+    .icon-3d:hover {
+      animation: icon3d 0.2s infinite;
+    }
+
+    /* Keyframes */
+    @keyframes icon3d {
+      0% {
+        text-shadow: 5px 4px var(--redColor), -5px -6px var(--blueColor);
+      }
+      25% {
+        text-shadow: -5px -6px var(--redColor), 5px 4px var(--blueColor);
+      }
+      50% {
+        text-shadow: 5px -4px var(--redColor), -8px 4px var(--blueColor);
+      }
+      75% {
+        text-shadow: -8px -4px var(--redColor), -5px -4px var(--blueColor);
+      }
+      100% {
+        text-shadow: -5px 0 var(--redColor), 5px -4px var(--blueColor);
+      }
+    }
+.footer {
+    background-color: transparent; /* Transparent background */
+    text-align: center;  /* Center text */
+    padding: 0;  /* Remove padding */
+    font-family: Arial, sans-serif;
+    color: #000; /* Text color */
+    flex-shrink: 0; /* Prevent the footer from shrinking */
+    margin-top: auto; /* Push the footer to the bottom */
+    width: 100%;
+    font-weight: bold; /* Make text bold */
+}
+
+.footer p {
+    margin: 0; /* Remove margin from paragraph */
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="flex-center">
+    <a href="mailto:services@revoxa.agency" target="_blank">
+        <i class="fas fa-envelope icon-3d"></i>
+    </a>
+    <a href="https://x.com/Drevn_X" target="_blank">
+        <i class="fas fa-x icon-3d"></i>
+    </a>
+    <a href="https://www.instagram.com/drevn_editor/" target="_blank">
+        <i class="fab fa-instagram icon-3d"></i>
+    </a>
+</div>
+<footer class="footer">
+        <br>
+    <p>&copy; 2025 REVOXA. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
