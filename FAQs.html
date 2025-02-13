@@ -13,19 +13,17 @@
     
     <style>
         :root {
-            --size-header: 2.25rem;
+           --size-header: 2.25rem;
             --size-accordion-title: 1.25rem;
             --size-accordion-content: 1rem;
-            --animation-speed: 100;
             --slide-ease: cubic-bezier(0.4, 0, 0.2, 1);
             --slide-duration: 400ms;
-            --slide-delay: 100ms;
-            --circle-duration: 500ms;
+
             --redColor: rgba(244, 67, 54, 1);
             --blueColor: rgba(33, 150, 243, 1);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -38,44 +36,60 @@
             color: #000;
         }
 
-        main > h1 {
+          main > h1 {
             font-size: var(--size-header);
             margin-bottom: 1rem;
         }
 
         .accordion {
-            background-color: #fff;
+            background-color: #000;
+            color: #fff;
             max-width: 56ch;
             margin-bottom: 0.5rem;
             border-radius: 8px;
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            transition: box-shadow var(--slide-duration) var(--slide-ease);
+            cursor: pointer;
         }
 
-        .accordion:hover {
-            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
-        }
-
-        .title a {
+        .title {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 1rem 1.25rem;
             font-size: var(--size-accordion-title);
-            text-decoration: none;
-            color: currentColor;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .title::after {
+            content: '\f078'; /* FontAwesome down arrow */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion.open .title::after {
+            transform: rotate(180deg);
         }
 
         .content {
+            background: #fff;
+            color: #000;
             font-size: var(--size-accordion-content);
             line-height: 1.6;
-            padding: 1rem 1.25rem;
-            display: none;
+            padding: 0 1.25rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
         }
 
-        .accordion:target .content {
-            display: block;
+        .accordion.open .content {
+            padding: 1rem 1.25rem;
+            max-height: 200px;
         }
+
+
+
 
         .flex-center {
             display: flex;
@@ -124,30 +138,31 @@
 
 
 
-    <main>
+<main>
         <h1>FAQ's</h1>
 
-        <section class="accordion" id="overview">
-            <h1 class="title"><a href="#overview">Overview</a></h1>
+        <section class="accordion open" onclick="toggleAccordion(this)">
+            <div class="title">Overview</div>
             <div class="content">
                 <p>Revoxa is a video editing agency that helps creators and businesses stand out with high-quality, professional videos.</p>
             </div>
         </section>
 
-        <section class="accordion" id="how-does-it-work">
-            <h1 class="title"><a href="#how-does-it-work">How does Revoxa ensure quality?</a></h1>
+        <section class="accordion" onclick="toggleAccordion(this)">
+            <div class="title">How does Revoxa ensure quality?</div>
             <div class="content">
                 <p>We maintain clear communication and use skilled editors to deliver polished results that align with your vision.</p>
             </div>
         </section>
 
-        <section class="accordion" id="inspiration">
-            <h1 class="title"><a href="#inspiration">What tools does Revoxa use?</a></h1>
+        <section class="accordion" onclick="toggleAccordion(this)">
+            <div class="title">What tools does Revoxa use?</div>
             <div class="content">
                 <p>We use industry-leading software like Adobe Premiere Pro, After Effects, and Blender.</p>
             </div>
         </section>
     </main>
+
 <br><br>
 
 
@@ -161,5 +176,19 @@
     <footer class="footer">
         <p>&copy; 2025 REVOXA. All rights reserved.</p>
     </footer>
+
+ <script>
+        function toggleAccordion(clickedAccordion) {
+            document.querySelectorAll('.accordion').forEach(accordion => {
+                if (accordion === clickedAccordion) {
+                    accordion.classList.toggle('open');
+                } else {
+                    accordion.classList.remove('open');
+                }
+            });
+        }
+    </script>
+
+
 </body>
 </html>
