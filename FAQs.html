@@ -4,267 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
-    <!-- Link to Google Fonts for Poppins -->
+    <title>FAQ & Contact</title>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
         :root {
             --size-header: 2.25rem;
             --size-accordion-title: 1.25rem;
             --size-accordion-content: 1rem;
             --animation-speed: 100;
-            --slide-ease: cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
+            --slide-ease: cubic-bezier(0.4, 0, 0.2, 1);
             --slide-duration: 400ms;
             --slide-delay: 100ms;
-            --circle-duration: 500ms; /* Adjusted for smoother transition */
+            --circle-duration: 500ms;
+            --redColor: rgba(244, 67, 54, 1);
+            --blueColor: rgba(33, 150, 243, 1);
         }
 
-        *,
-        *::before,
-        *::after {
-            position: relative;
-            left: 0;
-            top: 0;
-            box-sizing: border-box;
-        }
-
-        a,
-        p,
-        h1 {
-            margin: 0; /* Remove all default margins */
-        }
-
-        html {
-            height: 100%;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background: transparent;
-            font-family: 'Poppins', sans-serif; /* Changed to Poppins */
-            font-weight: 600;
-            margin: 0;
-            display: grid;
-            place-items: center;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 2rem;
-            min-height: 45%;
-        }
-
-        html,
-        body {
-            scroll-behavior: smooth;
-            scroll-padding-top: 1rem;
+            background: transparent;
+            color: #000;
         }
 
         main > h1 {
             font-size: var(--size-header);
-            margin-bottom: 0.5rem; /* Reduced margin for less space */
-            color: #333; /* Slightly darker color for better contrast */
-        }
-
-        ::selection {
-            background-color: rgba(0, 0, 0, 0.4);
+            margin-bottom: 1rem;
         }
 
         .accordion {
-            --circle-x: 1.8rem;
-            --circle-y: 0;
-            --circle-r: 200%;
-            --circle-bg: #fff;
-            color: #000;
-            background-color: var(--circle-bg);
+            background-color: #fff;
             max-width: 56ch;
-            margin-bottom: 0.5rem; /* Reduced margin-bottom to decrease the gap */
+            margin-bottom: 0.5rem;
             border-radius: 8px;
-            display: grid;
-            grid-template-rows: 0fr 0fr;
-            transition-timing-function: var(--slide-ease);
-            transition-duration: var(--slide-duration);
-            transition-property: opacity, box-shadow, grid-template-rows;
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-            opacity: 0.9;
+            overflow: hidden;
+            transition: box-shadow var(--slide-duration) var(--slide-ease);
         }
 
-        .accordion:not(:target):hover {
+        .accordion:hover {
             box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4);
         }
 
-        .accordion:not(:target):active {
-            opacity: 1;
-            box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.3);
-        }
-
-        .accordion,
-        .content {
-            overflow: hidden;
-        }
-
-        .accordion:target {
-            grid-template-rows: 0fr 1fr;
-            transition: grid-template-rows var(--slide-ease) var(--slide-duration)
-                var(--slide-delay);
-        }
-
-        .wrapper {
-            padding-block: 0 1.05rem;
-            padding-inline: 1.25rem;
+        .title a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            font-size: var(--size-accordion-title);
+            text-decoration: none;
+            color: currentColor;
         }
 
         .content {
             font-size: var(--size-accordion-content);
             line-height: 1.6;
-            opacity: 0;
-            animation: fadeInContent 300ms forwards;
-        }
-
-        .content p {
-            margin-bottom: 1rem;
-        }
-
-        .content a {
-            color: currentColor;
-            font-weight: 800;
-            text-decoration: underline;
-        }
-
-        main :last-child,
-        .content :last-child {
-            margin-bottom: 0;
-        }
-
-        .title a {
             padding: 1rem 1.25rem;
-            font-size: var(--size-accordion-title);
-            font-weight: 600;
-            color: currentColor;
-            text-decoration: none;
+            display: none;
+        }
+
+        .accordion:target .content {
+            display: block;
+        }
+
+        .flex-center {
             display: flex;
-            flex-direction: row;
-            place-items: center;
-            transition: background-color 200ms ease;
+            justify-content: center;
+            gap: 20px;
+            padding-top: 2rem;
         }
 
-        .title a::before {
-            --chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3C!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath fill='white' d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/%3E%3C/svg%3E");
-            content: "";
-            left: 0;
-            top: 0;
-            width: 0.65rem;
-            aspect-ratio: 320 / 512;
-            display: inline-block;
-            margin-right: 0.75rem;
-            transform: rotate(0deg);
-            transition: transform var(--slide-ease) var(--slide-duration);
-            mask-image: var(--chevron-icon);
-            mask-size: 100% 100%;
-            -webkit-mask-image: var(--chevron-icon);
-            -webkit-mask-size: 100% 100%;
-            background-color: currentColor;
+        .icon-3d {
+            font-size: 4rem;
+            color: #000;
+            transition: transform 0.2s, text-shadow 0.2s;
         }
 
-        .accordion::before,
-        .accordion::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: var(--circle-bg);
-            mix-blend-mode: difference;
-            transform-style: preserve-3d;
-            transition-timing-function: ease;
-            transition-property: opacity, clip-path, visibility;
-            pointer-events: none;
-            clip-path: circle(var(--r) at var(--circle-x) var(--circle-y));
-            border-radius: inherit;
-            z-index: 4;
+        .icon-3d:hover {
+            animation: icon3d 0.2s infinite;
         }
 
-        .accordion::before {
-            --r: 0%;
-            transition-delay: var(--circle-duration), var(--circle-duration), 0ms;
-            transition-duration: 0ms, var(--circle-duration), 0ms;
-            opacity: 0;
+        @keyframes icon3d {
+            0% { text-shadow: 5px 4px var(--redColor), -5px -6px var(--blueColor); }
+            25% { text-shadow: -5px -6px var(--redColor), 5px 4px var(--blueColor); }
+            50% { text-shadow: 5px -4px var(--redColor), -8px 4px var(--blueColor); }
+            75% { text-shadow: -8px -4px var(--redColor), -5px -4px var(--blueColor); }
+            100% { text-shadow: -5px 0 var(--redColor), 5px -4px var(--blueColor); }
         }
 
-        .accordion:target::before {
-            --r: var(--circle-r);
-            transition-delay: 0ms, 0ms, 0ms;
-            transition-duration: 0ms, var(--circle-duration), 0ms;
-            opacity: 1;
+        .footer {
+            text-align: center;
+            font-weight: bold;
+            padding: 1rem 0;
         }
 
-        .accordion::after {
-            --r: var(--circle-r);
-            transition-delay: 0ms, 0ms, var(--circle-duration);
-            transition-duration: 0ms, var(--circle-duration), 0ms;
-            visibility: hidden;
-            opacity: 1;
-        }
 
-        .accordion:target:after {
-            --r: 0%;
-            transition-delay: 0ms, 0ms, 0ms;
-            transition-duration: 0ms, 0ms, 0ms;
-            visibility: visible;
-            opacity: 0;
-        }
 
-        .title a:focus-visible {
-            background-color: hsl(0, 100%, 90%);
-            outline: none;
-        }
+        
 
-        .accordion:target .title a:focus-visible {
-            background-color: hsl(183, 100%, 93%);
-        }
-
-        /* New animation for content fade-in */
-        @keyframes fadeInContent {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
+
+
+
+
+
+
+
+
+
     <main>
         <h1>FAQ's</h1>
 
         <section class="accordion" id="overview">
             <h1 class="title"><a href="#overview">Overview</a></h1>
             <div class="content">
-                <div class="wrapper">
-                    <p>
-                       Revoxa is a content agency that helps creators and businesses grow with high-quality, consistent YouTube content. We handle the entire content production process editing, scripting, and strategy so you can focus on your brand without spending hours creating videos.
-                    </p>
-                </div>
+                <p>Revoxa is a video editing agency that helps creators and businesses stand out with high-quality, professional videos.</p>
             </div>
         </section>
 
         <section class="accordion" id="how-does-it-work">
-            <h1 class="title"><a href="#how-does-it-work">How does Revoxa ensure quality in every project?</a></h1>
+            <h1 class="title"><a href="#how-does-it-work">How does Revoxa ensure quality?</a></h1>
             <div class="content">
-                <div class="wrapper">
-                    <p>
-                       We follow a collaborative process, maintaining clear communication with clients and using a team of skilled editors to deliver creative, polished results that align with your vision and goals.
-                    </p>
-                </div>
+                <p>We maintain clear communication and use skilled editors to deliver polished results that align with your vision.</p>
             </div>
         </section>
 
         <section class="accordion" id="inspiration">
-            <h1 class="title"><a href="#inspiration">What tools and software does Revoxa use?</a></h1>
+            <h1 class="title"><a href="#inspiration">What tools does Revoxa use?</a></h1>
             <div class="content">
-                <div class="wrapper">
-                    <p>
-                       We use industry-leading software like Adobe Premiere Pro, After Effects, and Blender to deliver professional-grade videos with cutting-edge features.
-                    </p>
-                </div>
+                <p>We use industry-leading software like Adobe Premiere Pro, After Effects, and Blender.</p>
             </div>
         </section>
     </main>
+<br><br>
+
+
+
+    <div class="flex-center">
+        <a href="mailto:services@revoxa.agency" target="_blank"><i class="fas fa-envelope icon-3d"></i></a>
+        <a href="https://x.com/Drevn_X" target="_blank"><i class="fas fa-x icon-3d"></i></a>
+        <a href="https://www.instagram.com/drevn_editor/" target="_blank"><i class="fab fa-instagram icon-3d"></i></a>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 REVOXA. All rights reserved.</p>
+    </footer>
 </body>
 </html>
