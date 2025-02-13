@@ -3,30 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    
-    <meta property="og:image" content="https://res.cloudinary.com/doil7ek5v/image/upload/v1738854963/20250206_203715_haaucb.jpg">
-<meta property="og:title" content="Revoxa">
-<meta property="og:description" content="We handle everything: ideation, scripting, editing, thumbnails, SEO & posting.">
-<meta property="og:url" content="https://revoxa.agency">
-<meta property="og:type" content="website">
-
-
-    <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Revoxa">
-<meta name="twitter:description" content="We help creators and businesses grow on YouTube with done-for-you content production. You just record, we handle the rest!">
-<meta name="twitter:image" content="https://res.cloudinary.com/doil7ek5v/image/upload/v1738854963/20250206_203715_haaucb.jpg">
-<meta name="twitter:url" content="https://revoxa.agency">
-
-
-    
-     <meta name="description" content="Revoxa is a content agency that helps creators and businesses grow with high-quality YouTube content. We handle ideation, scripting, editing, thumbnails, SEO & posting.">
-<meta name="keywords" content="revoxa, revoxa agency, revoxa video editing, youTube content agency, revoxa youTube growth, video editing service, YouTube SEO, youTube growth strategy">
   <link rel="icon" href="https://res.cloudinary.com/doil7ek5v/image/upload/v1735320413/image_1_eczean.png" type="image/x-icon">
     <title>Revoxa</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+<script src="https://fast.wistia.com/player.js" async></script>
+    <script src="https://fast.wistia.com/embed/otq73ijtxj.js" async type="module"></script>
+
     <style>
         /* Reset margin and padding for body */
         body {
+
+            font-family: 'Lora', serif;
+
             margin: 0;
             padding: 0;
             display: flex;
@@ -251,6 +241,262 @@ p {
 
 
 
+
+
+
+
+/* Logo Styling */
+.logo img {
+    width: 70%; 
+    max-width: 1100px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto; /* Centered */
+    display: block;
+}
+
+/* Text Styling */
+h1 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-top: 10px;
+    font-weight: 700;
+    text-align: center;
+}
+
+p {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin-bottom: 20px;
+    opacity: 0.8;
+    font-weight: 500;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Tagline Styling */
+.tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 1.8rem);
+    opacity: 0.85;
+    max-width: 850px;
+    margin: 0 auto 30px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Buttons Wrapper */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Align them vertically */
+    gap: 30px; /* Add space between buttons */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Centering the whole section */
+.button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Stack elements if needed */
+    height: 15vh; /* Make it take the full height of the viewport */
+}
+
+/* Contact Button Styling */
+.contact-btn {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(45deg, #5a5a5a, #333, #8a8a8a);
+    color: #fff;
+    padding: 14px 30px;
+    border: 2px solid #007BFF;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    display: inline-block;
+    animation: borderPulse 2s infinite ease-in-out;
+}
+
+.contact-btn:hover {
+    background: linear-gradient(45deg, #7a7a7a, #555, #b0b0b0);
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    filter: brightness(1.3);
+    border-width: 4px;
+}
+
+.contact-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+
+/* Border Animation */
+@keyframes borderPulse {
+    0%, 100% {
+        border-color: #007BFF;
+    }
+    50% {
+        border-color: #f5a623;
+    }
+}
+
+/* Secondary Button - Simple Style */
+.secondary-btn {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f0f0; /* Light gray */
+    color: #333;
+    padding: 12px 25px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background: #ddd;
+}
+
+.secondary-btn:active {
+    transform: translateY(2px);
+}
+
+
+
+
+/* Icons Styling */
+.icons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 30px;
+    animation: fadeIn 1s ease-in-out;
+    flex-wrap: wrap;
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    transition: transform 0.3s ease, scale 0.3s ease;
+    margin: 10px;
+}
+
+.icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.icon:hover {
+    transform: perspective(1000px) rotateX(20deg) rotateY(20deg) scale(1.2);
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .logo img {
+        width: 90%;
+    }
+
+    .tagline {
+        font-size: 1.6rem;
+        max-width: 750px;
+    }
+
+    .contact-btn, .secondary-btn {
+        font-size: 1.1rem;
+        padding: 12px 25px;
+    }
+
+    .icons-container {
+        gap: 30px;
+    }
+
+    .icon {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo img {
+        width: 100%;
+    }
+
+    .tagline {
+        font-size: 1.4rem;
+        max-width: 650px;
+    }
+
+    .contact-btn, .secondary-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+
+    .icons-container {
+        gap: 20px;
+    }
+
+    .icon {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+        max-width: 90%;
+    }
+
+    .contact-btn, .secondary-btn {
+        font-size: 0.9rem;
+        padding: 10px 18px;
+    }
+
+    .icons-container {
+        gap: 15px;
+    }
+
+    .icon {
+        width: 50px;
+        height: 50px;
+    }
+}
+ wistia-player {
+            max-width: 800px; /* Prevents oversized player */
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+
     </style>
 </head>
 <body>
@@ -260,13 +506,49 @@ p {
   <p><span></span></p>
   <p><span></span></p>
 </div>
+
     <!-- Background Animation (Fixed and Jittering) -->
     <div class="bg"></div>
 
     <!-- Wrapping the entire content that should scroll -->
     <div class="content-container">
-        <!-- Iframes (scrollable content sections) -->
-        <iframe src="landing revoxa (1).html"></iframe>
+
+
+
+ <!-- Logo Section -->
+    <div class="logo">
+        <img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1734263763/20241215_172253_rfsn4b.png" alt="Revoxa Logo">
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <p class="tagline">
+We’ll create personalized YouTube content that attracts leads and boosts revenue.</p>
+
+
+<wistia-player media-id="otq73ijtxj" aspect="16:9"></wistia-player>
+<br><br>
+<div class="button-section">
+    <div class="button-container">
+        <a href="https://calendar.app.google/fcnVtss7T6ubDH1R6" class="contact-btn" target="_blank" rel="noopener noreferrer">Book a Call</a>
+        <a href="https://drive.google.com/drive/folders/1WhwQXEOqhUqvAsofIn75ciTFDhl_MeKz" class="secondary-btn">Case Study</a>
+    </div>
+</div>
+
+        
+
+    </div>
+<br> <br>
+    <!-- Software Icons Section -->
+    <div class="icons-container">
+        <div class="icon"><img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1734258638/Blender_logo_no_text.svg_1_ixj4wx.png" alt="Blender"></div>
+        <div class="icon"><img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1724936683/DaVinci_Resolve_Studio_iotbo5.png" alt="DaVinci Resolve"></div>
+        <div class="icon"><img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1734258796/Adobe_Premiere_Pro_CC_icon.svg_1_q5btgu.png" alt="Premiere Pro"></div>
+        <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_After_Effects_CC_icon.svg" alt="After Effects"></div>
+        <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop"></div>
+    </div>
+
+
 
         <iframe src="revoxa stack video (2).html" id="stack-video"></iframe>
         <iframe src="reels scroll revoxa (3).html"></iframe>
@@ -276,9 +558,8 @@ p {
 
         <iframe src="exp revoxa (4).html"></iframe>
         <iframe src="FAQs.html">
-</iframe>  <iframe src="footer.html">
 </iframe>
-
+<iframe src="footer.html">
 
 
 
