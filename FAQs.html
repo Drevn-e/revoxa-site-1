@@ -128,12 +128,132 @@
     outline: none;
     -webkit-tap-highlight-color: transparent;
 }
+        /* Container */
+    .content1 {
+      text-align: center;
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+      font-weight: 400;
+      width: 90%;
+      max-width: 800px;
+      overflow-wrap: break-word; /* Prevent text from breaking awkwardly */
+    }
+
+    /* Black Box with Animated Silver Text */
+    .highlight {
+      display: inline-flex; /* Align properly with text baseline */
+      justify-content: center;
+      align-items: center;
+      background-color: #000; /* Black background */
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-weight: 500;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer; /* Pointer Cursor on Hover */
+      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth Hover Transition */
+      white-space: nowrap; /* Prevents the text from breaking onto the next line */
+    }
+
+    /* Hover Effect */
+    .highlight:hover {
+      transform: scale(1.05); /* Slight Scale-Up */
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Subtle Shadow */
+    }
+
+    /* Silver Animated Text */
+    .highlight span {
+      display: block;
+      background-image: linear-gradient(
+        to right, 
+        #bbb, /* Soft silver */
+        #fff, /* Bright silver */
+        #bbb
+      );
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: silverShine 3s linear infinite; /* Silver Shine Animation */
+    }
+
+    /* Silver Shine Animation */
+    @keyframes silverShine {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    /* Line Spacing */
+    p {
+      margin: 15px 0;
+    }
+
+    /* Media Queries for Responsiveness */
+    /* Hide the general content for mobile and show only mobile content */
+    @media (max-width: 480px) {
+      .content {
+        display: none; /* Hide the general content on small screens */
+      }
+
+      .mobile-content {
+        display: block; /* Show the mobile-specific content */
+      }
+
+      .mobile-content p {
+        margin: 12px 0; /* Adjust margins for mobile content */
+        font-size: 1.2rem; /* Slightly smaller font size on mobile */
+      }
+
+      /* Highlight adjustments for smaller screens */
+      .highlight {
+        padding: 3px 10px; /* Smaller padding for very small screens */
+      }
+    }
+
+    /* On screens larger than 480px, show regular content */
+    @media (min-width: 481px) {
+      .mobile-content {
+        display: none; /* Hide mobile-specific content for larger screens */
+      }
+    }
         
 
     </style>
 </head>
 <body>
 
+
+ <div class="content1">
+    <p>Video editor's and expert in 
+      <span class="highlight"><span>Motion Graphics</span></span> with over</p>
+    <p>
+      <span class="highlight"><span>3+ years</span></span> of industry experience. Expertise extends to
+    </p>
+    <p>
+      <span class="highlight"><span>Reel and YouTube Video Editing</span></span>
+    </p>
+    <p>focused on driving growth, sales, and lead generation.</p>
+  </div>
+
+  <div class="mobile-content">
+    <p>Video editor's and expert in 
+      <span class="highlight"><span>Motion Graphics</span></span> with over</p>
+    <p>
+      <span class="highlight"><span>3+ years</span></span> of industry experience.<p>
+      <span class="highlight"><span>Reels and YouTube Content</span></span>
+    </p>
+  </div>
+
+
+<br>
+<br><br>
+
+<br> <br>
+<br>
 
 
 
