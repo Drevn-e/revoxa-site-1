@@ -579,10 +579,50 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
 </iframe>
 
 
-
-
     </div>
 
+
+  
+<script>
+  (function () {
+    let startY = 0;
+    let currentY = 0;
+    let threshold = 100; // pixels to detect swipe down
+    let isTouching = false;
+
+    function isMobile() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    if (isMobile()) {
+      window.addEventListener('touchstart', function (e) {
+        if (window.scrollY === 0) {
+          isTouching = true;
+          startY = e.touches[0].clientY;
+        }
+      });
+
+      window.addEventListener('touchmove', function (e) {
+        if (!isTouching) return;
+        currentY = e.touches[0].clientY;
+      });
+
+      window.addEventListener('touchend', function () {
+        if (!isTouching) return;
+        let diffY = currentY - startY;
+
+        if (diffY > threshold) {
+          location.reload(); // Refresh the page
+        }
+
+        // Reset values
+        isTouching = false;
+        startY = 0;
+        currentY = 0;
+      });
+    }
+  })();
+</script>
 
 </body>
 </html>
