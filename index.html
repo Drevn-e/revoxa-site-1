@@ -580,13 +580,14 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
     </div>
 </div>
 
-  
 <script>
   (function () {
     let startY = 0;
     let currentY = 0;
-    let threshold = 100; // pixels to detect swipe down
+    let threshold = 100;
     let isTouching = false;
+
+    const indicator = document.getElementById("refresh-indicator");
 
     function isMobile() {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -603,6 +604,13 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
       window.addEventListener('touchmove', function (e) {
         if (!isTouching) return;
         currentY = e.touches[0].clientY;
+        let diffY = currentY - startY;
+
+        if (diffY > 20) {
+          indicator.style.opacity = "1";
+          let scale = Math.min(diffY / threshold, 1);
+          indicator.style.transform = `translateX(-50%) scale(${scale})`;
+        }
       });
 
       window.addEventListener('touchend', function () {
@@ -610,10 +618,13 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
         let diffY = currentY - startY;
 
         if (diffY > threshold) {
-          location.reload(); // Refresh the page
+          indicator.innerText = "🔄";
+          setTimeout(() => location.reload(), 150); // Small delay for better UX
+        } else {
+          indicator.style.opacity = "0";
+          indicator.style.transform = "translateX(-50%) scale(0)";
         }
 
-        // Reset values
         isTouching = false;
         startY = 0;
         currentY = 0;
@@ -621,6 +632,7 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
     }
   })();
 </script>
+
 
 </body>
 </html>
