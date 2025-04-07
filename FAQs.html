@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FAQ & Contact</title>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
@@ -125,255 +129,14 @@
     -webkit-tap-highlight-color: transparent;
 }
         
- /* Container */
-    .content1 {
-      text-align: center;
-      font-size: 1.5rem;
-      line-height: 2.2rem;
-      font-weight: 400;
-      width: 90%;
-      max-width: 800px;
-      overflow-wrap: break-word; /* Prevent text from breaking awkwardly */
-    }
-
-    /* Black Box with Animated Silver Text */
-    .highlight {
-      display: inline-flex; /* Align properly with text baseline */
-      justify-content: center;
-      align-items: center;
-      background-color: #000; /* Black background */
-      padding: 6px 14px;
-      border-radius: 30px;
-      font-weight: 500;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer; /* Pointer Cursor on Hover */
-      transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth Hover Transition */
-      white-space: nowrap; /* Prevents the text from breaking onto the next line */
-    }
-
-    /* Hover Effect */
-    .highlight:hover {
-      transform: scale(1.05); /* Slight Scale-Up */
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Subtle Shadow */
-    }
-
-    /* Silver Animated Text */
-    .highlight span {
-      display: block;
-      background-image: linear-gradient(
-        to right, 
-        #bbb, /* Soft silver */
-        #fff, /* Bright silver */
-        #bbb
-      );
-      background-size: 200% auto;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: silverShine 3s linear infinite; /* Silver Shine Animation */
-    }
-
-    /* Silver Shine Animation */
-    @keyframes silverShine {
-      0% {
-        background-position: -200% center;
-      }
-      100% {
-        background-position: 200% center;
-      }
-    }
-
-    /* Line Spacing */
-    p {
-      margin: 15px 0;
-    }
-
-    /* Media Queries for Responsiveness */
-    /* Hide the general content for mobile and show only mobile content */
-    @media (max-width: 480px) {
-      .content {
-        display: none; /* Hide the general content on small screens */
-      }
-
-      .mobile-content {
-        display: block; /* Show the mobile-specific content */
-      }
-
-      .mobile-content p {
-        margin: 12px 0; /* Adjust margins for mobile content */
-        font-size: 1.2rem; /* Slightly smaller font size on mobile */
-      }
-
-      /* Highlight adjustments for smaller screens */
-      .highlight {
-        padding: 3px 10px; /* Smaller padding for very small screens */
-      }
-    }
-
-    /* On screens larger than 480px, show regular content */
-    @media (min-width: 481px) {
-      .mobile-content {
-        display: none; /* Hide mobile-specific content for larger screens */
-      }
-    }
-.wrapper {
-    width: 100%;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container0 {
-    height: 400px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: start;
-}
-
-/* Card Styles (For both Mobile and Desktop) */
-.card {
-    width: 80px;
-    border-radius: .75rem;
-    background-size: cover;
-    cursor: pointer;
-    overflow: hidden;
-    margin: 0 10px;
-    display: flex;
-    align-items: flex-end;
-    transition: .6s cubic-bezier(.28,-0.03,0,.99);
-    box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
-    position: relative;
-}
-
-.card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-input {
-    display: none;
-}
-
-input:checked + label {
-    width: 600px;
-}
-
-/* Mobile Version Styles */
-@media only screen and (max-width: 768px) {
-
-    /* Wrapper and container setup */
-    .wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden; /* Prevent scrolling */
-    }
-
-    .container0 {
-        width: 100%;
-        max-width: 400px; /* Max width for mobile view */
-        display: flex;
-        flex-direction: column; /* Stack the cards vertically */
-        align-items: center;
-        justify-content: flex-start;
-        height: 100%; /* Full height of the screen */
-        overflow-y: auto; /* Allow scrolling if needed for the whole container */
-    }
-
-    /* Card Styles */
-    .card {
-        width: 90%; /* Default width for small cards */
-        height: 80px; /* Small card height initially */
-        margin: 10px 0; /* Margin between cards */
-        border-radius: .75rem;
-        background-size: cover;
-        cursor: pointer;
-        overflow: hidden;
-        display: flex;
-        align-items: flex-end;
-        position: relative;
-        box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.8);
-        transition: height 0.6s cubic-bezier(.28,-0.03,0,.99), width 0.6s cubic-bezier(.28,-0.03,0,.99); /* Smooth height and width expansion */
-        max-height: 80vh; /* Prevents card from expanding too much */
-        overflow: hidden; /* Prevents horizontal overflow */
-    }
-
-    /* Checkboxes for card expansion */
-    input {
-        display: none;
-    }
-
-    input:checked + label {
-        height: 200px; /* Custom height for expanded card */
-        width: 91%; /* Custom width for expanded card */
-    }
-
-    /* Prevent horizontal scrolling */
-    body, html {
-        overflow: hidden;
-    }
-}
-
-
-
 
     </style>
 </head>
 <body>
- 
-  <div class="wrapper">
-        <div class="container0">
-
-            <input type="radio" name="slide" id="c1" checked>
-            <label for="c1" class="card">
-                <img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1735366287/Screenshot_20241228_113124_Chrome_wz0wrr.jpg" alt="Image 1">
-            </label>
-
-            <input type="radio" name="slide" id="c2">
-            <label for="c2" class="card">
-                <img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1735366287/Screenshot_20241228_113641_Chrome_urcc3k.jpg" alt="Image 2">
-            </label>
-
-            <input type="radio" name="slide" id="c3">
-            <label for="c3" class="card">
-                <img src="https://res.cloudinary.com/doil7ek5v/image/upload/v1735366720/Screenshot_20241228_114541_Chrome_1_jpaklf.jpg" alt="Image 3">
-            </label>
-
-        </div>
-    </div>
-
- <div class="content1">
-    <p>Video editor's and expert in 
-      <span class="highlight"><span>Motion Graphics</span></span> with over</p>
-    <p>
-      <span class="highlight"><span>3+ years</span></span> of industry experience. Expertise extends to
-    </p>
-    <p>
-      <span class="highlight"><span>Reels and YouTube Content</span></span>
-    </p>
-    <p>focused on driving growth, sales, and lead generation.</p>
-  </div>
-
-  <div class="mobile-content">
-    <p>Video editor's and expert in 
-      <span class="highlight"><span>Motion Graphics</span></span> with over</p>
-    <p>
-      <span class="highlight"><span>3+ years</span></span> of industry experience.<p>
-      <span class="highlight"><span>Reels and YouTube Content</span></span>
-    </p>
-  </div>
 
 
-<br>
-<br><br>
 
-<br> <br>
-<br>
+
 
 
 
@@ -385,7 +148,7 @@ input:checked + label {
         <section class="accordion open" onclick="toggleAccordion(this)">
             <div class="title">Overview</div>
             <div class="content">
-                <p>→Revoxa is a video editing agency that helps creators and businesses stand out with high-quality, professional videos.</p>
+                <p>→ Revoxa is a content agency that helps creators and businesses grow with compelling visuals that increase reach and revenue.</p>
             </div>
         </section>
 
@@ -404,6 +167,8 @@ input:checked + label {
             </div>
         </section>
 
+
+       
 
     </main>
 
