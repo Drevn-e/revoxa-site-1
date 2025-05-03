@@ -572,6 +572,98 @@ p {
 }
 
 
+
+
+
+
+
+
+.carousel {
+            height: 500px; /* Adjust overall carousel height */
+            perspective: 250px;
+        }
+
+        .carousel .carousel-item {
+            width: 600px; /* Adjust width for better fit */
+            height: 400px; /* Adjust height for a better fit */
+            background: transparent;
+            padding: 40px;
+            text-align: center;
+            border-radius: 15px; /* Rounded corners for carousel item */
+        }
+
+        .img-area {
+            width: 100%; /* Make image container take full width */
+            height: 100%; /* Make image container take full height */
+            margin: 0 auto;
+            overflow: hidden; /* Keep image within the container */
+            border-radius: 20px; /* Rounded corners for the container */
+        }
+
+        .img-area img {
+            width: 100%; /* Make image fill the container */
+            height: 100%; /* Make image fill the container */
+            object-fit: cover; /* Ensure the image covers the entire container */
+            border-radius: 15px; /* Rounded corners for the image */
+        }
+
+        .testi p {
+            color: #262626;
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        .testi h4 {
+            font-size: 20px;
+            margin: 0;
+            color: #000;
+        }
+
+        .testi h5 {
+            font-size: 14px;
+            letter-spacing: 5px;
+            margin: 7px 0;
+        }
+
+        /* Remove the blue highlight color on focus or active state */
+        a:focus, .carousel-item:focus, .img-area:focus, .carousel-item:active {
+            outline: none;
+            background-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            /* Center the carousel container */
+            .carousel {
+                height: 500px; /* Adjust carousel height for mobile */
+                display: flex;
+                justify-content: center; /* Horizontally center the carousel items */
+                align-items: center; /* Vertically center the carousel items */
+            }
+
+            /* Adjust carousel item size and positioning */
+            .carousel .carousel-item {
+                width: 90%; /* Adjust to take up 90% of the screen width for mobile */
+                height: 250px; /* Adjust height for mobile */
+                display: flex;
+                justify-content: center; /* Ensure image is centered horizontally */
+                align-items: center; /* Ensure image is centered vertically */
+            }
+
+            .img-area {
+                width: 100%; /* Ensure the container takes full width */
+                height: 100%; /* Ensure the container takes full height */
+                display: flex;
+                justify-content: center; /* Center the image horizontally */
+                align-items: center; /* Center the image vertically */
+            }
+
+            .img-area img {
+                width: 100%; /* Ensure the image covers full container width */
+                height: 100%; /* Ensure the image covers full container height */
+                object-fit: cover; /* Maintain the aspect ratio while filling the container */
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -683,8 +775,51 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
   </div>
 </section>
 
+ <br>  
+ <br>
+ <br>
 
-<iframe src="analze.html"></iframe>
+ <section>
+        <div class="carousel">
+            <a class="carousel-item" href="#">
+                <div class="img-area">
+                    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/image02.jpg" alt="Screenshot 1">
+                </div>
+            </a>
+            <a class="carousel-item" href="#">
+                <div class="img-area">
+                    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/hJtSv6aII2UKtGfG1Znvmi1VRs.avif" alt="Screenshot 2">
+                </div>
+            </a>
+            <a class="carousel-item" href="#">
+                <div class="img-area">
+                    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/image06.jpg" alt="Screenshot 3">
+                </div>
+            </a>
+
+            <a class="carousel-item" href="#">
+                <div class="img-area">
+                    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/image08.jpg" alt="Screenshot 4">
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel({
+                padding: 200
+            });
+            autoplay();
+            function autoplay() {
+                $('.carousel').carousel('next');
+                setTimeout(autoplay, 4500);
+            }
+        });
+    </script>
+
         
 <iframe src="thumbnail.html"> </iframe>
  
