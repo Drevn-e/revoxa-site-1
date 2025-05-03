@@ -513,6 +513,64 @@ p {
             margin: 0 auto;
         }
 
+ <!-- reel Section -->
+
+
+  .reels-section {
+    background: #f9f9f9;
+    padding: 40px 20px;
+  }
+
+  .reels-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .reel-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+
+.reel-wrapper {
+  position: relative;
+  max-width: 240px;
+  flex: 1 1 240px;
+  border: 5px solid black; /* Initial black border */
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-image 0.3s ease;
+}
+
+.reel-wrapper:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  border: 5px solid transparent; /* Make border transparent to show gradient */
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(45deg, #6b8bff, #61f5a1) border-box;
+}
+
+  wistia-player:not(:defined) {
+    display: block;
+    filter: blur(5px);
+    background: center / contain no-repeat;
+    padding-top: 177.78%; /* 9:16 aspect ratio */
+    border-radius: 20px;
+  }
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+.custom-title {
+  font-family: 'Arial', sans-serif; /* Example: Arial, or any font of your choice */
+  font-weight: bold;
+  font-size: 32px;
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+}
+
 
     </style>
 </head>
@@ -568,8 +626,64 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
 
 
 
-        <iframe src="revoxa stack video (2).html" id="stack-video"></iframe>
-        <iframe src="reels scroll revoxa (3).html"></iframe>
+    <br>
+<br>
+<br>
+<br>
+<section class="reels-section">
+  <h1 class="custom-title">Short-Form Video Examples</h1>
+
+
+  <div class="reel-gallery">
+
+    <!-- Reel 1 -->
+    <div class="reel-wrapper">
+      <script src="https://fast.wistia.com/embed/eilge3g8yl.js" async type="module"></script>
+      <style>
+        wistia-player[media-id='eilge3g8yl']:not(:defined) {
+          background-image: url('https://fast.wistia.com/embed/medias/eilge3g8yl/swatch');
+        }
+      </style>
+      <wistia-player media-id="eilge3g8yl" aspect="0.5625"></wistia-player>
+    </div>
+
+    <!-- Reel 2 -->
+    <div class="reel-wrapper">
+      <script src="https://fast.wistia.com/embed/iuz1cortwz.js" async type="module"></script>
+      <style>
+        wistia-player[media-id='abcd1234']:not(:defined) {
+          background-image: url('https://fast.wistia.com/embed/medias/iuz1cortwz/swatch');
+        }
+      </style>
+      <wistia-player media-id="iuz1cortwz" aspect="0.5625"></wistia-player>
+    </div>
+
+    <!-- Reel 3 -->
+    <div class="reel-wrapper">
+      <script src="https://fast.wistia.com/embed/wxyz5678.js" async type="module"></script>
+      <style>
+        wistia-player[media-id='wxyz5678']:not(:defined) {
+          background-image: url('https://fast.wistia.com/embed/medias/wxyz5678/swatch');
+        }
+      </style>
+      <wistia-player media-id="wxyz5678" aspect="0.5625"></wistia-player>
+    </div>
+
+    <!-- Reel 4 -->
+    <div class="reel-wrapper">
+      <script src="https://fast.wistia.com/embed/ijkl9012.js" async type="module"></script>
+      <style>
+        wistia-player[media-id='ijkl9012']:not(:defined) {
+          background-image: url('https://fast.wistia.com/embed/medias/ijkl9012/swatch');
+        }
+      </style>
+      <wistia-player media-id="ijkl9012" aspect="0.5625"></wistia-player>
+    </div>
+
+  </div>
+</section>
+
+
 <iframe src="analze.html"></iframe>
         
 <iframe src="thumbnail.html"> </iframe>
