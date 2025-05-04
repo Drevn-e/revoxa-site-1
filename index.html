@@ -507,13 +507,47 @@ p {
         height: 50px;
     }
 }
- wistia-player {
-            max-width: 800px; /* Prevents oversized player */
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
+
+
+     .wistia-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 755px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 6px solid transparent; /* make border transparent */
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: border-color 0.3s ease;
+    background: linear-gradient(#333, #333) padding-box, linear-gradient(90deg, blue, blue) border-box; /* Updated gradient */
+}
+
+/* Keep gradient on hover or animate (optional) */
+.wistia-wrapper:hover {
+    background: linear-gradient(#333, #333) padding-box, linear-gradient(90deg, blue, blue) border-box; /* Updated gradient */
+}
+
+/* Internal elements stay same */
+.wistia-wrapper wistia-player,
+.wistia-wrapper iframe,
+.wistia-wrapper img,
+.wistia-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    display: block;
+}
+
+
+.wistia-wrapper {
+    background: black; /* fills gap visually */
+}
+
 
  <!-- reel Section -->
 
@@ -724,7 +758,9 @@ p {
 We’ll create personalized YouTube content that attracts leads and boosts revenue.</p>
 
 
-<wistia-player media-id="otq73ijtxj" aspect="16:9"></wistia-player>
+<div class="wistia-wrapper">
+    <wistia-player media-id="otq73ijtxj" aspect="16:9"></wistia-player>
+</div>
 
 <br><br>
 <div class="button-section">
