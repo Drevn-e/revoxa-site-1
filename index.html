@@ -21,6 +21,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" href="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/Logo_revoxa.png" type="image/x-icon">
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
     <title>Revoxa</title>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;700&family=Poppins:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -727,6 +729,86 @@ p {
             }
         }
 
+ .stats-counter-section {
+      font-family: 'Inter', sans-serif;
+      background: transparent;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .stats-counter-container {
+      display: flex;
+      gap: 40px;
+      text-align: center;
+      padding: 20px 10px;
+      flex-wrap: wrap;
+    }
+
+    .stats-counter-box {
+      flex: 1 1 120px;
+      padding: 10px 20px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .stats-counter-box.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats-counter-box:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 25%;
+      right: 0;
+      height: 50%;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .stats-count {
+      font-size: 42px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-variant-numeric: tabular-nums;
+      min-width: 130px;
+      display: inline-block;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stats-count.pop {
+      transform: scale(1.1);
+    }
+
+    .stats-counter-box p {
+      font-size: 16px;
+      opacity: 0.75;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .stats-counter-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .stats-counter-box::after {
+        display: none;
+      }
+
+      .stats-count {
+        font-size: 36px;
+        min-width: 100px;
+      }
+    }
+
 
 
     </style>
@@ -783,7 +865,114 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
         <div class="icon"><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop"></div>
     </div>
 
-<br><br>
+
+    <!-- Number count Section -->
+
+     
+<div class="stats-counter-section" id="stats-section">
+  <div class="stats-counter-container">
+    <div class="stats-counter-box" data-delay="0">
+      <div class="stats-count" id="videos">0</div>
+      <p>Videos created</p>
+    </div>
+    <div class="stats-counter-box" data-delay="150">
+      <div class="stats-count" id="views">0M</div>
+      <p>Million+ views</p>
+    </div>
+    <div class="stats-counter-box" data-delay="300">
+      <div class="stats-count" id="hours">0</div>
+      <p>Total (hrs)</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const videosEl = document.getElementById('videos');
+  const viewsEl = document.getElementById('views');
+  const hoursEl = document.getElementById('hours');
+  const statBoxes = document.querySelectorAll('.stats-counter-box');
+
+  let baseData = {
+    videos: 120,
+    views: 3.7,
+    hours: 25450,
+    lastUpdated: Date.now()
+  };
+
+  const storedData = JSON.parse(localStorage.getItem("weeklyStats")) || baseData;
+  const now = Date.now();
+  const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
+  if (now - storedData.lastUpdated >= oneWeek) {
+    storedData.videos += 2;
+    storedData.views += 0.1;
+    storedData.hours += 500;
+    storedData.lastUpdated = now;
+    localStorage.setItem("weeklyStats", JSON.stringify(storedData));
+  }
+
+  function animateCount(el, target, isMillion = false, duration = 1000) {
+    let start = 0;
+    const frameRate = 20;
+    const steps = duration / frameRate;
+    const increment = (target - start) / steps;
+
+    function update() {
+      start += increment;
+      if (start < target) {
+        el.textContent = isMillion
+          ? start.toFixed(1) + 'M'
+          : Math.floor(start).toLocaleString();
+
+        el.classList.add('pop');
+        setTimeout(() => el.classList.remove('pop'), 150);
+
+        setTimeout(update, frameRate);
+      } else {
+        el.textContent = isMillion
+          ? target.toFixed(1) + 'M'
+          : target.toLocaleString();
+      }
+    }
+
+    update();
+  }
+
+  function resetCounts() {
+    videosEl.textContent = '0';
+    viewsEl.textContent = '0M';
+    hoursEl.textContent = '0';
+    statBoxes.forEach(box => box.classList.remove('visible'));
+  }
+
+  function runAnimation() {
+    statBoxes.forEach((box, i) => {
+      const delay = parseInt(box.getAttribute('data-delay')) || 0;
+      setTimeout(() => box.classList.add('visible'), delay);
+    });
+
+    animateCount(videosEl, storedData.videos);
+    animateCount(viewsEl, storedData.views, true);
+    animateCount(hoursEl, storedData.hours);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        runAnimation();
+      } else {
+        resetCounts();
+      }
+    });
+  }, {
+    threshold: 0.4
+  });
+
+  observer.observe(document.getElementById('stats-section'));
+</script>
+
+
+<br>
 <br>
 <br>
 <h1 class="page-title">Long-Form Video Examples</h1>
