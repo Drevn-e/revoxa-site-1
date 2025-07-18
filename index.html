@@ -30,13 +30,17 @@
 <script src="https://fast.wistia.com/player.js" async></script>
     <script src="https://fast.wistia.com/embed/otq73ijtxj.js" async type="module"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
 
     <style>
         /* Reset margin and padding for body */
         body {
 
-            font-family: 'Lora', serif;
+  font-family: "Monaco", monospace;
 
             margin: 0;
             padding: 0;
@@ -809,7 +813,335 @@ p {
       }
     }
 
+   .faq-section {
+      padding: 60px 20px;
+      background: transparent;
+      color: white;
+      font-family: 'Inter', sans-serif;
+    }
 
+    .faq-section h2,
+    .faq-section p {
+      text-align: center;
+        font-family: Tahoma, sans-serif;
+
+      color: black;
+    }
+
+    .faq-section h2 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .faq-section p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+    }
+
+    .faq-columns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-column {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      min-width: 300px;
+    }
+
+    .faq-box {
+      border-radius: 18px;
+      background: linear-gradient(135deg, #111 0%, #1b1b1b 100%);
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.07), 0 8px 20px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      min-height: 85px;
+    }
+
+    .faq-question {
+      padding: 22px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.08rem;
+    }
+
+    .faq-box:hover {
+      background: linear-gradient(135deg, #1c1c1c, #2a2a2a);
+      transform: translateY(-1px);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      overflow: hidden;
+      padding: 0 25px;
+      color: #bbb;
+      font-size: 0.95rem;
+      text-align: left;
+      transition:
+        max-height 0.5s ease,
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        padding 0.4s ease;
+    }
+
+    .faq-box.active .faq-answer {
+      padding: 15px 25px 20px;
+      max-height: 300px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toggle-icon {
+      font-size: 1.4rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-box.active .toggle-icon {
+      transform: rotate(45deg);
+    }
+
+    .button-wraer {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    .book-call9 {
+      position: relative;
+      margin: 40px auto 0 auto;
+      padding: 16px 34px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: white;
+      border: 2px solid #2a2a2a;
+      cursor: pointer;
+      font-size: 1.15rem;
+      font-weight: 600;
+      display: block;
+      text-align: center;
+      z-index: 1;
+      box-shadow: 0 0 14px rgba(255, 0, 64, 0.4), 0 0 28px rgba(255, 0, 64, 0.2);
+      animation: enhancedGlow 2.2s ease-in-out infinite alternate;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .book-call9:hover {
+      transform: scale(1.06) translateY(-4px);
+      box-shadow: 0 0 22px rgba(255, 0, 64, 0.7), 0 0 34px rgba(255, 0, 64, 0.5);
+    }
+
+    @keyframes enhancedGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(255, 0, 64, 0.3), 0 0 22px rgba(255, 0, 64, 0.15);
+      }
+      50% {
+        box-shadow: 0 0 26px rgba(255, 0, 64, 0.5), 0 0 40px rgba(255, 0, 64, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 12px rgba(255, 0, 64, 0.35), 0 0 26px rgba(255, 0, 64, 0.2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .faq-columns {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+.contact-wrapper {
+  font-family: 'Inter', sans-serif;
+  background: transparent; /* Transparent background */
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.contact-wrapper * {
+  box-sizing: border-box;
+}
+
+.contact-box {
+  position: relative;
+  overflow: hidden; /* Important for shimmer clipping */
+  width: 100%;
+  max-width: 800px;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 20, 0.85) 0%,
+    rgba(0, 0, 0, 0.9) 40%,
+    rgba(30, 30, 30, 0.85) 100%
+  );
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    0 0 10px rgba(255, 255, 255, 0.02);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+
+
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .email-box {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .email-box h2 {
+      margin-bottom: 10px;
+      font-size: 26px;
+    }
+
+    .email-box a {
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .email-box a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    .email-box a:hover::after {
+      width: 100%;
+    }
+
+    .email-box .tagline2 {
+      margin-top: 10px;
+      color: #ccc;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex: 1;
+      min-width: 250px;
+      justify-content: flex-end;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      transition: 0.3s;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .social-icons a:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      .contact-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .social-icons {
+        justify-content: flex-start;
+      }
+    }
+
+.email-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.email-text {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #aaa;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.copy-icon:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.copy-msg {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  font-size: 12px;
+  color: #0f0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+a {
+  text-decoration: none;
+}
+h2 {
+  font-family: 'Inter', sans-serif;
+}
 
     </style>
 </head>
@@ -1113,7 +1445,7 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
 <iframe src="thumbnail.html"> </iframe>
  
 
-<section style="max-width: 900px; margin: 0 auto; padding: 24px; background: white; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); font-family: cursive;">
+<section style="max-width: 900px; margin: 0 auto; padding: 24px; background: white; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); font-family: Tahoma, sans-serif;">
   <h2 style="text-align: center; margin-bottom: 24px; font-size: 1.8rem; color: #222; font-weight: 900;">Book an Appointment</h2>
   <div style="position: relative; width: 100%; height: 500px; border-radius: 12px; overflow: hidden;">
     <iframe 
@@ -1127,7 +1459,137 @@ We’ll create personalized YouTube content that attracts leads and boosts reven
   <br>
   <br> <br>
   
-        <iframe src="FAQs.html"> </iframe>
+<section class="faq-section">
+    <h2>FAQs</h2>
+    <p>Some questions we are asked</p>
+
+    <div class="faq-columns">
+      <div class="faq-column">
+        <div class="faq-box">
+          <div class="faq-question">
+            <span>Q: What do revoxa do exactly?</span>
+            <span class="toggle-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            We create high-converting content that helps you attract leads, grow your brand, and increase profit.
+          </div>
+        </div>
+        <div class="faq-box">
+          <div class="faq-question">
+            <span>Is this service right for me?</span>
+            <span class="toggle-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            If growing your audience and revenue matters to you, then "YES" it's for you.
+          </div>
+        </div>
+        <div class="faq-box">
+          <div class="faq-question">
+            <span>How much does it cost?</span>
+            <span class="toggle-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            We focus on quality and strategy and we’re not cheap. If you're looking for cheap edits, this probably isn’t for you.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-column">
+        <div class="faq-box">
+          <div class="faq-question">
+            <span>How long until I see results?</span>
+            <span class="toggle-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Most clients start seeing real progress within 30–45 days.
+          </div>
+        </div>
+        <div class="faq-box">
+          <div class="faq-question">
+            <span>Can I cancel anytime?</span>
+            <span class="toggle-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes, but we recommend giving it at least 2–3 months for full impact. 
+          </div>
+        </div>
+        <div class="faq-box">
+          <div class="faq-question">
+            <span>How can I get started?</span>
+            <span class="toggle-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Book a call or visit our socials to connect, we’ll map out a custom content plan for you.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-wraer">
+      <button class="book-call9">📞 Book a Call</button>
+    </div>
+  </section>
+
+  <script>
+    const faqBoxes = document.querySelectorAll('.faq-box');
+
+    faqBoxes.forEach(box => {
+      const question = box.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        faqBoxes.forEach(b => {
+          if (b !== box) b.classList.remove('active');
+        });
+        box.classList.toggle('active');
+      });
+    });
+  </script>
+
+
+
+
+
+
+  <section class="contact-wrapper">
+    <div class="contact-box">
+      <div class="email-box">
+        <h2 style="font-family: 'Inter', sans-serif;">Contact Us</h2>
+
+       <a href="mailto:services@revoxa.agency" class="email-text">
+  services@revoxa.agency
+</a>
+<span class="copy-icon" onclick="copyEmail()" title="Copy email">
+  <i class="fas fa-copy"></i>
+</span>
+<span id="copy-msg" class="copy-msg">Copied!</span>
+
+        <p class="tagline2">We usually respond within 13 hours</p>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/revoxa_agency/" target="_blank"><i class="fab fa-instagram"></i></a>
+       <a href="https://x.com/Drevn_X" target="_blank" class="social-icon">
+  <i class="fab fa-x-twitter"></i>
+</a>
+
+        <a href="https://www.youtube.com/@drevnofficial" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+
+  </section>
+<footer style="text-align: center; font-size: 14px; color: gray; padding: 20px;">
+    <p>© 2025 REVOXA. All rights reserved.</p>
+</footer>
+<script>
+  function copyEmail() {
+    const email = 'services@revoxa.agency';
+    navigator.clipboard.writeText(email).then(() => {
+      const msg = document.getElementById('copy-msg');
+      msg.style.opacity = '1';
+      setTimeout(() => {
+        msg.style.opacity = '0';
+      }, 1500);
+    });
+  }
+</script>
 
     </div>
 </div>
