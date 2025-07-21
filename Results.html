@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Results</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, #111, #222, #333, #111);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: #fff;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .filter-buttons button {
+      background: #444;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s ease;
+    }
+
+    .filter-buttons button.active,
+    .filter-buttons button:hover {
+      background: #ff004f;
+    }
+
+    .screenshots-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .screenshots-list img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .screenshots-list img:hover {
+      transform: scale(1.01);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox:after {
+      content: '✕';
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Our Results</h2>
+
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="youtube">YouTube</button>
+    <button class="filter-btn" data-filter="instagram">Instagram</button>
+  </div>
+
+  <div class="screenshots-list" id="screenshots">
+    <!-- Sample Images (Replace src with real links) -->
+    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/Screenshot%202025-07-02%20115359.png" alt="YouTube 1" loading="lazy" class="screenshot youtube">
+   
+    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/Screenshot%202025-07-21%20125236.png" alt="YouTube 2" loading="lazy" class="screenshot youtube">
+     <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/Image.jpeg" alt="Instagram 1" loading="lazy" class="screenshot instagram">
+    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/Image%202.jpeg" alt="YouTube 3" loading="lazy" class="screenshot youtube">
+    <img src="https://raw.githubusercontent.com/Drevn-e/images-videos-revoxa/refs/heads/main/Image%203.jpeg" alt="Instagram 3" loading="lazy" class="screenshot instagram">
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+    // Filter
+    const buttons = document.querySelectorAll('.filter-btn');
+    const screenshots = document.querySelectorAll('.screenshot');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+
+        screenshots.forEach(img => {
+          if (filter === 'all' || img.classList.contains(filter)) {
+            img.style.display = 'block';
+          } else {
+            img.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    screenshots.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
